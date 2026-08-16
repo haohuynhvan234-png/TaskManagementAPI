@@ -1,0 +1,36 @@
+//Tạo mới task
+POST http://localhost:3001/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Task 1",
+  "description": "Description for Task 1"
+}
+###
+//Lấy danh sách task
+GET http://localhost:3001/api/tasks
+
+###
+//Lấy chi tiết task theo id
+GET http://localhost:3001/api/tasks/64a0e3f5c8
+###
+//Cập nhật task theo id
+PUT http://localhost:3001/api/tasks/64a0e3f5c8
+Content-Type: application/json
+{
+  "title": "Updated Task 1",
+  "description": "Updated description for Task 1"
+}
+###
+//Xóa task theo id
+DELETE http://localhost:3001/api/tasks/64a0e3f5c8
+###
+//thêm task mới
+POST http://localhost:3001/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Task 2",
+  "description": "Description for Task 2"
+}
+###
