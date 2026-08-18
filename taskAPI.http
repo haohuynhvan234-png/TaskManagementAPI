@@ -1,36 +1,53 @@
-//Tạo mới task
-POST http://localhost:3001/api/tasks
+@baseUrl = http://localhost:3001
+@taskId = 64f8d0c1a7d4b2c9d1e4f5a6
+
+### 1) Lấy danh sách task
+GET {{baseUrl}}/api/tasks?status=todo&priority=high&page=1&limit=10&sortBy=createdAt&order=desc
+
+### 2) Tạo task mới
+POST {{baseUrl}}/api/tasks
 Content-Type: application/json
 
 {
-  "title": "Task 1",
-  "description": "Description for Task 1"
+  "title": "Học Express.js",
+  "description": "Hoàn thành REST API cho project quản lý task",
+  "priority": "high",
+  "dueDate": "2026-08-20"
 }
-###
-//Lấy danh sách task
-GET http://localhost:3001/api/tasks
 
-###
-//Lấy chi tiết task theo id
-GET http://localhost:3001/api/tasks/64a0e3f5c8
-###
-//Cập nhật task theo id
-PUT http://localhost:3001/api/tasks/64a0e3f5c8
-Content-Type: application/json
-{
-  "title": "Updated Task 1",
-  "description": "Updated description for Task 1"
-}
-###
-//Xóa task theo id
-DELETE http://localhost:3001/api/tasks/64a0e3f5c8
-###
-//thêm task mới
-POST http://localhost:3001/api/tasks
+### 3) Lấy chi tiết task theo id
+GET {{baseUrl}}/api/tasks/{{taskId}}
+
+### 4) Cập nhật task theo id
+PUT {{baseUrl}}/api/tasks/{{taskId}}
 Content-Type: application/json
 
 {
-  "title": "Task 2",
-  "description": "Description for Task 2"
+  "title": "Học Express.js nâng cao",
+  "description": "Cập nhật mô tả và deadline hợp lý",
+  "priority": "medium",
+  "status": "doing",
+  "dueDate": "2026-08-25"
 }
-###
+
+### 5) Cập nhật trạng thái task theo thứ tự todo -> doing -> done
+PATCH {{baseUrl}}/api/tasks/{{taskId}}/status
+Content-Type: application/json
+
+{
+  "status": "doing"
+}
+
+### 6) Xóa task theo id
+DELETE {{baseUrl}}/api/tasks/{{taskId}}
+
+### 7) Dùng search + filter
+GET {{baseUrl}}/api/tasks?search=express&status=todo&priority=high&page=1&limit=5
+
+### 8) Invalid status transition example
+PATCH {{baseUrl}}/api/tasks/{{taskId}}/status
+Content-Type: application/json
+
+{
+  "status": "todo"
+}
