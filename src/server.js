@@ -4,9 +4,18 @@ import swaggerUi from "swagger-ui-express";
 import connectDB from "./config/db.js";
 import taskRoutes from "./routes/taskRoutes.js";
 import swaggerSpec from "./swagger/swagger.js";
+//gọi cors
+import cors from "cors";
 
 dotenv.config();
-
+//cho phép đường dẫn có thể kết nối từ cors
+app.use(
+  cors({
+    origin: "task-management-kislai.vercel.app", // Cho phép tất cả các domain
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 const app = express();
 
 app.use((req, res, next) => {
